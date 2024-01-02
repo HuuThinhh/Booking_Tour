@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var user = (TourMVC.Models.Customer)System.Web.HttpContext.Current.Session["user"];
+}
+
+<div class="container">
+    <div class="row h-100 mb-5 mt-5">
+        <div class="col-8 mx-auto text-center m-5">
+            <div>
+                <label class="h1 text-center m-5">Đăng Nhập</label>
+            </div>
+            <label class="text-center alert-danger mb-4">
+                @ViewBag.thongbao
+            </label>
+            <form method="post">
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" name="email" class="form-control" value="@ViewBag.email" />
+                    <label class="form-label">Địa chỉ Email</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input type="password" name="password" class="form-control" />
+                    <label class="form-label">Mật khẩu</label>
+                </div>
+
+                <!-- 2 column grid layout for inline styling -->
+                <!--<div class="row mb-4">
+                    <div class="col d-flex justify-content-center">-->
+                <!-- Checkbox -->
+                <!--<div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                        <label class="form-check-label" for="form2Example31"> Remember me </label>
+                    </div>
+                </div>
+
+                <div class="col">-->
+                <!-- Simple link -->
+                <!--<a href="#!">Quên mật khẩu?</a>
+                    </div>
+                </div>-->
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Đăng Nhập</button>
+            </form>
+        </div>
+    </div>
+</div>

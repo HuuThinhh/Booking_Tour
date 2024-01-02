@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+@section footer {
+    <script>
+        function showSuccessMessage() {
+            alert('Cảm ơn bạn! Chúng tôi sẽ thông báo cho bạn sớm nhất!');
+        }
+    </script>
+}
+<div class="text-center">
+    <br />
+    <h4 class="text-info">Nội dụng chuyển khoản: Cọc Lại - Tên tour & Email của bạn</h4>
+    <br />
+    <img src="~/Public/images/admin_images/qrCode.jpg" width="400" height="400" alt="QR Code">
+    <br />
+    <hr />
+    <a href="@Url.Action("History","TaiKhoan")" class="btn btn-sm btn-success text-light" onclick="showSuccessMessage()"><i class="fa fa-check"></i> Hoàn thành</a>
+    <br />
+
+    <br />
+</div>

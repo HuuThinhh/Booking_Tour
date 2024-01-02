@@ -1,0 +1,140 @@
+﻿@model MyClass.Models.Booking
+
+@{
+    ViewBag.Title = "Chỉnh sửa tình trạng thanh toán";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section footer {
+    <script>
+    $(document).ready(function () {
+        var maxParticipants = parseInt('@ViewBag.NumberOfParticipants' || 0);
+        var initialNumberOfAdults = parseFloat($('#NumberOfAdults').val()) || 0;
+        var initialNumberOfChildren = parseFloat($('#NumberOfChildren').val()) || 0;
+
+    $('input[name="NumberOfChildren"], input[name="NumberOfAdults"]').on('input', function () {
+    var numberOfAdults = parseFloat($('#NumberOfAdults').val()) || 0;
+        var numberOfChildren = parseFloat($('#NumberOfChildren').val()) || 0;
+
+    var totalParticipants = numberOfAdults + numberOfChildren;
+
+    if (totalParticipants > maxParticipants) {
+    // Hiển thị thông báo lỗi và ẩn nút đặt tour
+    $('#error-message').text('Tổng số người lớn và trẻ em không thể vượt quá ' + maxParticipants);
+    $('#book-button').hide();
+    } else {
+    // Ẩn thông báo lỗi và hiển thị nút đặt tour
+    $('#error-message').text('');
+    $('#book-button').show();
+
+    // Tiếp tục tính toán giá và hiển thị thông tin
+    var adultPrice = parseFloat('@ViewBag.AdultPrice' || 0);
+    var childPrice = parseFloat('@ViewBag.ChildPrice' || 0);
+    var totalPrice = (adultPrice * numberOfAdults) + (childPrice * numberOfChildren);
+    var totalPrice2 = ((adultPrice * numberOfAdults) + (childPrice * numberOfChildren)) * 0.25;
+    var tongtien = 'Tổng tiền là: ' + totalPrice.toLocaleString('vi-VN') + ' Vnđ';
+        var coc = 'Tiền cọc là: ' + totalPrice2.toLocaleString('vi-VN') + ' Vnđ';
+        // Kiểm tra sự thay đổi số lượng
+        //if (numberOfAdults !== initialNumberOfAdults || numberOfChildren !== initialNumberOfChildren) {
+        //
+        //    $('#displayTotalPrice').hide();
+        //} else {
+        //
+        //    $('#displayTotalPrice').show();
+        //}
+    $('#TotalPrice').text(tongtien);
+    $('#TotalPrice2').text(coc);
+    $('#TotalPriceInput').val(totalPrice);
+    }
+    });
+    });
+    </script>
+    <script>
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + 1);
+    var minDate = currentDate.toISOString().slice(0, 10);
+    document.getElementById("endDatePicker").min = minDate;
+    var maxDate = '@ViewBag.EndDate';
+    document.getElementById("endDatePicker").max = maxDate;
+    </script>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <h3 class="box-title">Tình trạng thanh toán Tour Booking</h3>
+    <p class="text-muted">Add class <code>.Booking </code></p>
+    <a href="@Url.Action("Index","Booking")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+    <p></p>
+    @*@Html.HiddenFor(model => model.TourId, new { htmlAttributes = new { @class = "form-control" } })*@
+    <p>Khách hàng: @ViewBag.LastName @ViewBag.FirstName </p>
+    <p>Email: @ViewBag.Email</p>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TourId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.TourId, ViewBag.ListTourId as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.HotelId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.HotelId, ViewBag.ListHotelId as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TransportationId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.TransportationId, ViewBag.ListTransportationId as SelectList, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TransportationId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BookDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BookDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "endDatePicker" } })
+            @*<input type="datetime-local" name="EndDate" class="form-control" value=""/>*@
+            @Html.ValidationMessageFor(model => model.BookDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <p>Số lượng còn: @ViewBag.NumberOfParticipants</p>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumberOfAdults, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NumberOfAdults, new { htmlAttributes = new { @class = "form-control", name = "NumberOfAdults" } })
+            @Html.ValidationMessageFor(model => model.NumberOfAdults, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumberOfChildren, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NumberOfChildren, new { htmlAttributes = new { @class = "form-control", name = "NumberOfChildren" } })
+            @Html.ValidationMessageFor(model => model.NumberOfChildren, "", new { @class = "text-danger", id = "error-message" })
+        </div>
+    </div>
+    @*<div class="form-group">
+        @Html.LabelFor(model => model.TotalPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">*@
+    @*@Html.DisplayFor(model => model.TotalPrice, new { htmlAttributes = new { @id = "TotalPriceInput" } })*@
+    @*@Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <input type="hidden" name="TotalPrice" id="TotalPriceInput" />
+    @*<h4><span id="displayTotalPrice" class="form-control"></span></h4>*@
+    <h4><span id="TotalPrice"></span></h4>
+    <h5><span id="TotalPrice2"></span></h5>
+
+    @Html.HiddenFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button id="book-button" class="btn btn-sm btn-success text-light" type="submit" name="create"><i class="fa fa-save"></i> Lưu</button>
+        </div>
+    </div>
+
+}
+

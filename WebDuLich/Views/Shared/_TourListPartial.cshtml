@@ -1,0 +1,42 @@
+﻿@*@using MyClass.Models
+    @model List<Tour>*@
+@model IEnumerable<MyClass.Models.Tour>
+@if (Model.Any())
+{
+    foreach (var tour in Model)
+    {
+        <div class="col-lg-3 col-sm-6 mb-2">
+            <div class="image-tour position-relative">
+                @*<a href="/TourCus/Detail/@tour.Id.ToString()">*@
+                <a href="@Url.Action("Detail","TourCus",new {@id=tour.Id})">
+
+                    <img src="~/Public/images/tour_images/@tour.Image" alt="" class="img-fluid" style="object-fit: cover; width: 100%; height: 160px" />
+                </a>
+
+                @*<p><span class="fa fa-tags"></span> <span>@tour.AdultPrice</span></p>*@
+                <p><span class="fa fa-tags"></span> <span>@string.Format("{0:N0}", tour.AdultPrice)</span></p>
+            </div>
+            <div class="package-info">
+
+                <div style="width: 100%; height: 40px;">
+                    <h6 class="mt-1"><span class="fa fa-map-marker mr-2"></span>@tour.Place.Name</h6>
+                </div>
+                <div style="width: 100%; height: 108px;">
+                    <h5 class="my-2">@tour.Name</h5>
+                </div>
+
+                @*<p class="">@Html.Raw(@tour.Description.Substring(0, Math.Min(45, tour.Description.Length)))...</p>*@
+                <ul class="listing mt-3">
+                    <li><span class="fa fa-clock-o mr-2"></span>Thời gian : <span>@tour.Type</span></li>
+                </ul>
+            </div>
+        </div>
+    }
+}
+else 
+{
+    <div style="height:300px">
+        <h5>Không có tour nào</h5>
+    </div>
+}
+

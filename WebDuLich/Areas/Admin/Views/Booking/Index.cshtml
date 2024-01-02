@@ -1,0 +1,118 @@
+﻿@model IEnumerable<MyClass.Models.Booking>
+
+@{
+    ViewBag.Title = "Quản lý tour được book";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header {
+    <link href="~/Public/css/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer {
+    <script src="~/Public/js/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+<h3 class="box-title">Danh Sách Booking</h3>
+<p class="text-muted">Add class <code>.Booking </code></p>
+<p> </p>
+@Html.Partial("Message")
+<div class="table-responsiv">
+
+    <table class="table table-bordered table-striped" id="myTable">
+        <thead>
+            <tr class="is-table-row bg-secondary bg-gradient">
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class="col-sm-0.5 text-white text-center">
+                    @Html.DisplayNameFor(model => model.TourId)
+                </th>
+                @*<th class="text-white text-center">
+                        @Html.DisplayNameFor(model => model.HotelId)
+                    </th>
+                    <th class="text-white text-center">
+                        @Html.DisplayNameFor(model => model.TransportationId)
+                    </th>*@
+                <th class="col-sm-0.5 text-white text-center">
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th class="col-sm-1.5 text-white text-center">
+                    @Html.DisplayNameFor(model => model.BookDate)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.NumberOfAdults)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.NumberOfChildren)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.TotalPrice)
+                    
+                </th>
+                <th class=" col-sm-1.7 text-white text-center">
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th class="col-sm-3 text-white text-center">Chức năng</th>
+            </tr>
+        <thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.TourId)
+                    </td>
+                    @*<td class="text-center">
+                            @Html.DisplayFor(modelItem => item.HotelId)
+                        </td>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.TransportationId)
+                        </td>*@
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.BookDate)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.NumberOfAdults)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.NumberOfChildren)
+                    </td>
+                    <td class="text-center">
+                        @*@Html.DisplayFor(modelItem => item.TotalPrice)*@
+                        @item.TotalPrice.ToString("N0")
+                    </td>
+                    <td class="text-center">
+                        @if (item.Status == 1)
+                        {<p>Chưa thanh toán</p>}
+                        @if (item.Status == 2)
+                        {<p>Đã cọc</p>}
+                        @if (item.Status == 3)
+                        {<p>Đã Thanh toán</p>}
+                        @*@Html.DisplayFor(modelItem => item.Status)*@
+                    </td>
+                    <td class="text-center">
+                        @*<a href="@Url.Action("Details","Booking", new { id = item.Id })" class="btn btn-sm btn-primary text-light"><i class="fa fa-eye"></i>Xem</a>*@
+                        <a href="@Url.Action("Edit2","Booking", new { id = item.Id })" class="btn btn-sm btn-primary text-light"><i class="fa fa-edit"></i>Thông tin</a>
+                        <a href="@Url.Action("Edit","Booking", new { id = item.Id })" class="btn btn-sm btn-info text-light"><i class="fa fa-edit"></i>Tình trạng</a>
+
+                        <a href="@Url.Action("Delete","Booking", new { id = item.Id })" class="btn btn-sm btn-danger text-light"><i class="fa fa-trash"></i> Xoá</a>
+                    </td>
+                </tr>
+            }
+        <tbody>
+    </table>
+
+</div>
+

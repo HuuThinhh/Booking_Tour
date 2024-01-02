@@ -1,0 +1,47 @@
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\bin\Debug\MyClass.dll.config
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\bin\Debug\MyClass.dll
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\bin\Debug\MyClass.pdb
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\bin\Debug\EntityFramework.dll
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\bin\Debug\EntityFramework.xml
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\obj\Debug\MyClass.csproj.AssemblyReference.cache
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\obj\Debug\MyClass.dll
+E:\Visual Studio\BaiTapC#\WebDuLich\MyClass\obj\Debug\MyClass.pdb
+E:\IT\DoAn\Main\Web_DuLich\MyClass\bin\Debug\MyClass.dll.config
+E:\IT\DoAn\Main\Web_DuLich\MyClass\bin\Debug\MyClass.dll
+E:\IT\DoAn\Main\Web_DuLich\MyClass\bin\Debug\MyClass.pdb
+E:\IT\DoAn\Main\Web_DuLich\MyClass\bin\Debug\EntityFramework.dll
+E:\IT\DoAn\Main\Web_DuLich\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+E:\IT\DoAn\Main\Web_DuLich\MyClass\bin\Debug\EntityFramework.xml
+E:\IT\DoAn\Main\Web_DuLich\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+E:\IT\DoAn\Main\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+E:\IT\DoAn\Main\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+E:\IT\DoAn\Main\Web_DuLich\MyClass\obj\Debug\MyClass.dll
+E:\IT\DoAn\Main\Web_DuLich\MyClass\obj\Debug\MyClass.pdb
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\bin\Debug\MyClass.dll.config
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\bin\Debug\MyClass.dll
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\bin\Debug\MyClass.pdb
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\bin\Debug\EntityFramework.dll
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\bin\Debug\EntityFramework.xml
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.AssemblyReference.cache
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\obj\Debug\MyClass.dll
+E:\Visual Studio\DoAn2\Web_DuLich\MyClass\obj\Debug\MyClass.pdb
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\bin\Debug\MyClass.dll.config
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\bin\Debug\MyClass.dll
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\bin\Debug\MyClass.pdb
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\bin\Debug\EntityFramework.dll
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\bin\Debug\EntityFramework.SqlServer.dll
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\bin\Debug\EntityFramework.xml
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\bin\Debug\EntityFramework.SqlServer.xml
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.AssemblyReference.cache
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.CoreCompileInputs.cache
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\obj\Debug\MyClass.csproj.CopyComplete
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\obj\Debug\MyClass.dll
+E:\Visual Studio\DoAnTotNghiep\Web_DuLich\MyClass\obj\Debug\MyClass.pdb

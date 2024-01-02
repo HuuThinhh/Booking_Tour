@@ -1,0 +1,172 @@
+﻿@model MyClass.Models.Tour
+
+@{
+    ViewBag.Title = "Thêm mới tour";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section header {
+    <script src="https://cdn.tiny.cloud/1/sg4zt74ugc5af15vzfcmtnnesvduw6ljmvy8nqx1t154p1it/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+}
+@section footer {
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            mergetags_list: [
+                { value: 'First.Name', title: 'First Name' },
+                { value: 'Email', title: 'Email' },
+            ],
+            ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
+        });
+    </script>
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function (e) {
+            var input = e.target;
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById('selectedImage').src = e.target.result;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    </script>
+    <script>
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 1);
+        var minDate = currentDate.toISOString().slice(0, 10);
+        document.getElementById("endDatePicker").min = minDate;
+    </script>
+}
+@using (Html.BeginForm("Create", "Tour", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <h3 class="box-title">Thêm tour mới</h3>
+    <p class="text-muted">Add class <code>.Tour </code></p>
+    <a href="@Url.Action("Index","Tour")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })*@
+                <textarea name="Description" class="form-control"></textarea>
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.PlaceId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PlaceId, ViewBag.ListPlaceId as SelectList, "Chọn", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.PlaceId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.NumberOfParticipants, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberOfParticipants, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NumberOfParticipants, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.AdultPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdultPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdultPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.ChildPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ChildPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ChildPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <span class="text-danger">(*)</span>@Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "endDatePicker" } })
+                @*<input class="form-control" name="EndDate" type="datetime-local"  asp-format="{0:yyyy-MM-ddTHH:mm}" />*@
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<input type="file" name="desktopImage" id="desktopImage" class="form-control-file">*@
+
+                <input type="file" name="desktopImage" id="imageInput">
+                <br />
+                @Html.ValidationMessage("desktopImage", new { @class = "text-danger" })
+                <br />
+                <img id="selectedImage" style="width:150px;height:200px;" />
+                @*@Html.TextBoxFor(model => model.Image, new { type = "file", @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })*@
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.IsDomestic, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsDomestic)
+                    @Html.ValidationMessageFor(model => model.IsDomestic, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="text-danger">(*)</span>@Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.Type, new List<SelectListItem>
+                    {
+                    new SelectListItem { Value = "1day", Text = "1 ngày" },
+                    new SelectListItem { Value = "2day", Text = "2 ngày 1 đêm" },
+                    new SelectListItem { Value = "3day", Text = "3 ngày 2 đêm" },
+                    }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-sm btn-success text-light" type="submit" name="create"><i class="fa fa-save"></i> Thêm</button>
+            </div>
+        </div>
+    </div>
+
+}
+

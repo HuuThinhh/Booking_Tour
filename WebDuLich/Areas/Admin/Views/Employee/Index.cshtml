@@ -1,0 +1,118 @@
+﻿@model IEnumerable<MyClass.Models.Employee>
+
+@{
+    ViewBag.Title = "Quản Lý Nhân Viên";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header {
+    <link href="~/Public/css/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer {
+    <script src="~/Public/js/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+
+<h3 class="box-title">Danh Sách Nhân viên</h3>
+<p class="text-muted">Add class <code>.Employee </code></p>
+<a href="@Url.Action("Create","Employee")" class="btn btn-sm btn-success text-light"><i class="fa fa-plus"></i> Thêm Nhân Viên Mới</a>
+<p> </p>
+@Html.Partial("Message")
+<div class="table-responsiv">
+
+    <table class="table table-bordered table-striped" id="myTable">
+        <thead>
+            <tr class="is-table-row bg-secondary bg-gradient">
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th class="text-white text-center">
+
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoleId)
+                    </th>*@
+                <th class="col-sm-2 text-white text-center">Chức năng</th>
+            </tr>
+        <thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (item.RoleId != 1)
+                        {@Html.DisplayFor(modelItem => item.Id)}
+
+                    </td>
+                    <td>
+                        @if (item.RoleId != 1)
+                        {@Html.DisplayFor(modelItem => item.LastName)}
+
+                    </td>
+                    <td>
+                        @if (item.RoleId != 1)
+                        {@Html.DisplayFor(modelItem => item.FirstName)}
+
+
+                    </td>
+                    <td>
+                        @if (item.RoleId != 1)
+                        {@Html.DisplayFor(modelItem => item.Email)}
+
+                    </td>
+                    <td>
+                        @if (item.RoleId != 1)
+                        {@Html.DisplayFor(modelItem => item.Phone)}
+
+                    </td>
+                    <td>
+                        @if (item.RoleId != 1)
+                        {@Html.DisplayFor(modelItem => item.Address)}
+
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoleId)
+                        </td>*@
+                    <td>
+                        @if (item.RoleId != 1)
+                        {
+                            <a href="@Url.Action("Details", "Employee", new { id = item.Id })" class="btn btn-sm btn-primary text-light"><i class="fa fa-eye"></i>Xem</a>
+                            <a href="@Url.Action("Edit", "Employee", new { id = item.Id })" class="btn btn-sm btn-info text-light"><i class="fa fa-edit"></i>Sửa</a>
+                            <a href="@Url.Action("Delete", "Employee", new { id = item.Id })" class="btn btn-sm btn-danger text-light"><i class="fa fa-trash"></i> Xoá</a>
+                        }
+
+                    </td>
+                </tr>
+            }
+        <tbody>
+    </table>
+
+</div>
+
+
+

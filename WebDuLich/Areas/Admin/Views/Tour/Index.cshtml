@@ -1,0 +1,142 @@
+﻿@model IEnumerable<MyClass.Models.Tour>
+
+@{
+    ViewBag.Title = "Quản lý tour";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header {
+    <link href="~/Public/css/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer {
+    <script src="~/Public/js/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+
+<h3 class="box-title">Danh Sách Tour</h3>
+<p class="text-muted">Add class <code>.Tour </code></p>
+<a href="@Url.Action("Create","Tour")" class="btn btn-sm btn-success text-light"><i class="fa fa-plus"></i> Thêm Tour Mới</a>
+<p> </p>
+@Html.Partial("Message")
+<div class="table-responsiv">
+
+    <table class="table table-bordered table-striped" id="myTable">
+        <thead>
+            <tr class="is-table-row bg-secondary bg-gradient">
+                <th class="text-white">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class=" col-sm-2 text-white text-center">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.PlaceId)
+                    </th>*@
+                <th class="text-white">
+                    @Html.DisplayNameFor(model => model.NumberOfParticipants)
+                </th>
+                <th class="text-white">
+                    @Html.DisplayNameFor(model => model.AdultPrice)
+                </th>
+                <th class="text-white">
+                    @Html.DisplayNameFor(model => model.ChildPrice)
+                </th>
+                @*<th class="text-white">
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>*@
+                <th class="text-white">
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Image)
+                </th>
+                @*<th class="text-white">
+                        @Html.DisplayNameFor(model => model.IsDomestic)
+                    </th>*@
+                <th class="text-white text-center">Chức năng</th>
+            </tr>
+        <thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="col-sm-2">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    @*<td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>*@
+                    @*<td>
+            @Html.DisplayFor(modelItem => item.PlaceId)
+        </td>*@
+                    @if (item.NumberOfParticipants > 10)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfParticipants)
+                        </td>
+                    }
+                    @if (item.NumberOfParticipants <= 10)
+                    {
+                        <td class="text-danger">
+                            @Html.DisplayFor(modelItem => item.NumberOfParticipants)
+                        </td>
+                    }
+                    
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.AdultPrice)*@
+                    @item.AdultPrice.ToString("N0")
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.ChildPrice)*@
+                    @item.ChildPrice.ToString("N0")
+                </td>
+                    @if (item.EndDate > DateTime.Now.AddDays(5))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                    }
+                    @if (item.EndDate < DateTime.Now.AddDays(5))
+                    {
+                        <td class="text-danger">
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                    }
+                    @*<td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Image)*@
+                        <img src="@Url.Content("~/Public/images/tour_images/" + item.Image)" style="width:150px;height:200px;" />
+                    </td>
+                    @*<td>
+            @Html.DisplayFor(modelItem => item.IsDomestic)
+        </td>*@
+                    <td class="text-center">
+                        <a href="@Url.Action("Details","Tour", new { id = item.Id })" class="btn btn-sm btn-primary text-light"><i class="fa fa-eye"></i>Xem</a>
+                        <p></p>
+                        <a href="@Url.Action("Edit","Tour", new { id = item.Id })" class="btn btn-sm btn-info text-light"><i class="fa fa-edit"></i>Sửa</a>
+                        <p></p>
+                        <a href="@Url.Action("Delete","Tour", new { id = item.Id })" class="btn btn-sm btn-danger text-light"><i class="fa fa-trash"></i> Xoá</a>
+                    </td>
+                </tr>
+            }
+        <tbody>
+    </table>
+
+</div>
+
+
+

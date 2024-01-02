@@ -1,0 +1,60 @@
+﻿@model MyClass.Models.Customer
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    var customer = (MyClass.Models.Customer)System.Web.HttpContext.Current.Session["user"];
+}
+
+
+<div class="container">
+    <h2 class="text-center p-5">Thông tin tài khoản</h2>
+    <hr />
+    @Html.Partial("Message")
+    <dl class="dl-horizontal">
+        <dt class="py-1">
+            Họ của bạn:
+        </dt>
+
+        <dd>
+            <input class="w-50" value="@customer.FirstName" readonly />
+        </dd>
+
+        <dt class="py-1">
+            Tên của bạn:
+        </dt>
+
+        <dd>
+            <input class="w-50" value="@customer.LastName" readonly />
+        </dd>
+
+        <dt class="py-1">
+            Địa chỉ email:
+        </dt>
+
+        <dd>
+            <input class="w-50" value="@customer.Email" readonly />
+        </dd>
+
+        <dt class="py-1">
+            Số điện thoại:
+        </dt>
+
+        <dd>
+            <input class="w-50" value="@customer.Phone" readonly />
+        </dd>
+
+        <dt class="py-1">
+            Địa chỉ:
+        </dt>
+
+        <dd>
+            <input class="w-50" value="@customer.Address" readonly />
+        </dd>
+
+    </dl>
+    <p class="pb-5">
+        <a class="btn btn-primary" href="/TaiKhoan/Edit">Chỉnh sửa</a>
+    </p>
+</div>
+

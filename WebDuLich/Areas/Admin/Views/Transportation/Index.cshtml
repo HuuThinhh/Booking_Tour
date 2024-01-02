@@ -1,0 +1,65 @@
+﻿@model IEnumerable<MyClass.Models.Transportation>
+
+@{
+    ViewBag.Title = "Quản lý phương tiện";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header {
+    <link href="~/Public/css/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer {
+    <script src="~/Public/js/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+
+<h3 class="box-title">Danh Sách Phương Tiện</h3>
+<p class="text-muted">Add class <code>.Transportation </code></p>
+<a href="@Url.Action("Create","Transportation")" class="btn btn-sm btn-success text-light"><i class="fa fa-plus"></i> Thêm Phương Tiện Mới</a>
+<p> </p>
+@Html.Partial("Message")
+<div class="table-responsiv">
+
+    <table class="table table-bordered table-striped" id="myTable">
+        <thead>
+            <tr class="is-table-row bg-secondary bg-gradient">
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th class="text-white text-center">
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+
+                <th class="text-white text-center">Chức năng</th>
+            </tr>
+        <thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+
+                    <td class="text-center">
+                        @*<a href="@Url.Action("Details","Transportation", new { id = item.Id })" class="btn btn-sm btn-primary text-light"><i class="fa fa-eye"></i>Xem</a>*@
+                        <a href="@Url.Action("Edit","Transportation", new { id = item.Id })" class="btn btn-sm btn-info text-light"><i class="fa fa-edit"></i>Sửa</a>
+                        <a href="@Url.Action("Delete","Transportation", new { id = item.Id })" class="btn btn-sm btn-danger text-light"><i class="fa fa-trash"></i> Xoá</a>                       
+                        </td>
+                </tr>
+            }
+        <tbody>
+    </table>
+
+</div>
+
+

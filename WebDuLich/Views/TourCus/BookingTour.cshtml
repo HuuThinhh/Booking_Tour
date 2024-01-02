@@ -1,0 +1,198 @@
+﻿@model MyClass.Models.Booking
+@{
+    ViewData["Title"] = "BookingTour";
+    var selectedTour = ViewBag.SelectedTour as MyClass.Models.Tour;
+    var customer = (MyClass.Models.Customer)System.Web.HttpContext.Current.Session["user"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section footer {
+    <script>
+    $(document).ready(function () {
+    var maxParticipants = parseInt('@ViewBag.NumberOfParticipants' || 0);
+
+        $('input[name="NumberOfChildren"], input[name="NumberOfAdults"]').on('input', function () {
+        var numberOfAdults = parseFloat($('#NumberOfAdults').val()) || 0;
+        var numberOfChildren = parseFloat($('#NumberOfChildren').val()) || 0;
+        var totalParticipants = numberOfAdults + numberOfChildren;
+
+        if (totalParticipants > maxParticipants || numberOfAdults < 0 || numberOfChildren < 0 || (numberOfAdults === 0 && numberOfChildren === 0)) {
+            // Hiển thị thông báo lỗi và ẩn nút đặt tour
+            $('#error-message').text('Số người không hợp lệ hoặc vượt quá ' + maxParticipants);
+            $('#book-button').hide();
+            $('#TotalPrice').hide();
+            $('#TotalPrice2').hide();
+            $('#imgcode').hide();
+            $('#Noidung').hide();
+        } else {
+            // Ẩn thông báo lỗi và hiển thị nút đặt tour
+            $('#error-message').text('');
+            $('#book-button').show();
+            $('#TotalPrice').show();
+            $('#TotalPrice2').show();
+            $('#imgcode').show();
+            $('#Noidung').show();
+
+            // tính toán giá và hiển thị thông tin
+            var tourIdValue = document.getElementById("TourId").value;
+            var userIdValue = document.getElementById("UserId").value;
+            /*var bookDateValue = document.getElementById("endDatePicker").value;*/
+            var adultPrice = parseFloat('@ViewBag.AdultPrice' || 0);
+            var childPrice = parseFloat('@ViewBag.ChildPrice' || 0);
+            var totalPrice = (adultPrice * numberOfAdults) + (childPrice * numberOfChildren);
+            var totalPrice2 = ((adultPrice * numberOfAdults) + (childPrice * numberOfChildren)) * 0.25;
+            var tongtien = 'Tổng tiền: ' + totalPrice.toLocaleString('vi-VN') + ' Vnđ';
+            var coc = 'Vui lòng cọc: ' + totalPrice2.toLocaleString('vi-VN') + ' Vnđ';
+            $('#TotalPrice').text(tongtien);
+            $('#TotalPrice2').text(coc);
+            $('#imgcode').attr('src', '/Public/images/admin_images/qrCode.jpg').css('display', 'block').css('margin', 'auto').addClass("col-md-10");
+            /* var transferContent = 'Nội dung chuyển khoản: Tên tour và email của bạn';*/
+            var transferContent = 'Nội dung chuyển khoản: ' + tourIdValue + '-' + userIdValue + '-Ngày đi tour-' + numberOfAdults + '-' + numberOfChildren ;
+            $('#Noidung').text(transferContent);
+            $('#TotalPriceInput').val(totalPrice);
+        }
+    });
+});
+    </script>
+    <script>
+        var currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 1);
+        var minDate = currentDate.toISOString().slice(0, 10);
+        document.getElementById("endDatePicker").min = minDate;
+        var maxDate = '@ViewBag.EndDate';
+        document.getElementById("endDatePicker").max = maxDate;
+    </script>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container py-lg-5 py-sm-4">
+        <h1 class="heading text-capitalize text-center mb-lg-5 mb-4"> Đặt Tour </h1>
+        <div class="contact-grids">
+            <div class="row">
+                <div class="col-lg-5 contact-left-form">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <input type="hidden" id="TourId" name="TourId" value="@selectedTour.Id" />
+                        @Html.ValidationMessageFor(model => model.TourId, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.HotelId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <p>Khách sạn</p>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.HotelId, ViewBag.ListHotelId as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.TransportationId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <p>Phương tiện di chuyển</p>
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.TransportationId, ViewBag.ListTransportationId as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TransportationId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">*@
+                        @*@Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        @*<p>UserId</p>
+                            <div class="col-md-10">*@
+                        @*@Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })*@
+                        <input type="hidden" id="UserId" name="UserId" value="@customer.Id" />
+                        @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
+                        @*</div>
+                            </div>*@
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.BookDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <p>Ngày đi tour</p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.BookDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "endDatePicker" } })
+                                @Html.ValidationMessageFor(model => model.BookDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.NumberOfAdults, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <p>Số người lớn</p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NumberOfAdults, new { htmlAttributes = new { @class = "form-control", name = "NumberOfAdults" } })
+                                @Html.ValidationMessageFor(model => model.NumberOfAdults, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @*@Html.LabelFor(model => model.NumberOfChildren, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                            <p>Số trẻ em</p>
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.NumberOfChildren, new { htmlAttributes = new { @class = "form-control", name = "NumberOfChildren" } })
+                                @Html.ValidationMessageFor(model => model.NumberOfChildren, "", new { @class = "text-danger", id = "error-message" })
+                            </div>
+                        </div>
+
+
+                        <input type="hidden" name="TotalPrice" id="TotalPriceInput" />
+                        <input type="hidden" name="Status" value="1" />
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <br />
+                        <h4><span id="TotalPrice"></span></h4>
+                        <br />
+                        <hr />
+                        <h5><span id="TotalPrice2"></span></h5>
+                        <h6 class="text-info"><span id="Noidung"></span></h6>
+                        <br />
+                        <img id="imgcode" />
+                        <br />
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <button id="book-button" type="submit" class="btn btn-block sent-butnn" data- id="btnSubmit">Đặt Tour</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 contact-right pl-lg-5 text-center">
+                    <p class="mt-3">
+                        <br />
+                        <h3>@ViewBag.Name</h3>
+                        <hr />
+                        <img src="@Url.Content("~/Public/images/tour_images/"+@ViewBag.Image)" alt="" class="img-fluid" style="width:412px;height:206px" />
+                        <hr />
+                        @*<p><span class="fa fa-tags"></span> <span>Giá người lớn: @ViewBag.AdultPrice VNĐ</span></p>
+            <hr />
+            <p><span class="fa fa-tags"></span> <span>Giá trẻ em: @ViewBag.ChildPrice VNĐ</span></p>*@
+                    <p><span class="fa fa-tags"></span> <span>Giá người lớn: @string.Format("{0:N0}", @ViewBag.AdultPrice) VNĐ</span></p>
+                    <hr />
+                    <p><span class="fa fa-tags"></span> <span>Giá trẻ em: @string.Format("{0:N0}", @ViewBag.ChildPrice) VNĐ</span></p>
+                    <hr />
+                    <p><span class="fa fa-user"></span> <span>Số lượng còn: @ViewBag.NumberOfParticipants</span></p>
+                    <hr />
+                    
+                    <p><span class="fa fa-calendar-o"></span> <span>Ngày kết thúc: @ViewBag.EndDate</span></p>
+                    <hr />
+                    <h4 class="fa fa-star"> Top những khách sạn ở miền trung:</h4>
+                    <br />
+                    <hr />
+                    <a class="fa fa-arrow-right" target="_blank" href="https://www.tripadvisor.com.vn/Hotels-g293926-Hue_Thua_Thien_Hue_Province-Hotels.html"> Tham khảo top khách sạn tại Huế</a>
+                    <br />
+
+                    <br />
+                    <a class="fa fa-arrow-right" target="_blank" href="https://www.tripadvisor.com.vn/SmartDeals-g298082-Hoi_An_Quang_Nam_Province-Hotel-Deals.html"> Tham khảo top khách sạn tại Hội An</a>
+                    <br />
+
+                    <br />
+                    <a class="fa fa-arrow-right" target="_blank" href="https://www.tripadvisor.com.vn/Hotels-g298085-Da_Nang-Hotels.html"> Tham khảo top khách sạn tại Đà Nẵng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container py-lg-4 py-sm-3">
+    @Html.Partial("Message2")
+    <br />
+    @using (Html.BeginForm("Index", "TourCus", FormMethod.Get)) // -- phần thay đổi
+    {
+
+        <input asp-for="SearchTerm" class="searchTerm" name="searchString" placeholder="Nhập tour, địa điểm bạn muốn tìm kiếm..." value="@ViewData["searchString"]">
+        <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+        </button>
+
+        @*<p>
+                Title: @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" />
+            </p>*@
+    }
+    <p class="fa fa-filter"> Lọc: </p>
+    <select id="tourType" default-value="">
+        <option value="">Tất cả tour</option>
+        <option value="1day">Tour trong ngày</option>
+        <option value="2day">Tour 2 ngày 1 đêm</option>
+        <option value="3day">Tour 3 ngày 2 đêm</option>
+    </select>
+    <select id="placeId" default-value="">
+        <option value="">Tất cả địa điểm</option>
+        <option value="3">Đà Nẵng</option>
+        <option value="4">Quảng Nam</option>
+        <option value="8">Huế</option>
+        <option value="5">Đà Nẵng & Huế</option>
+        <option value="6">Đà Nẵng & Quảng Nam</option>
+        <option value="7">Đà Nẵng & Quảng Nam & Huế</option>
+        <!-- Add more options based on your locations -->
+    </select>
+    <h3 class="m-2  text-capitalize text-center"> Hãy lựa chọn Tour ưa thích</h3>
+    <br />
+    <div>
+        <div id="tourList" class="row mb-3">
+
+        </div>
+    </div>
+</div>
+
+
+@*@section Scripts {
+        <script>
+            function syncUpData() {
+                var selectedType = $('#tourType').val();
+                $.ajax({
+                    url: '/TourCus/listTour',
+                    type: 'GET',
+                    data: { loaitour: selectedType },
+                    success: function (result) {
+                        // Update the tour list in the view
+                        $('#tourList').html(result);
+                    },
+                    error: function () {
+                        alert('An error occurred while retrieving the tour list.');
+                    }
+                });
+            }
+            $(document).ready(function () {
+                syncUpData();
+                $('#tourType').change(function () {
+                    syncUpData();
+                });
+            });
+        </script>
+    }*@
+@*@section Scripts {
+        <script>
+            function syncUpData() {
+                var selectedType = $('#tourType').val();
+                var selectedPlaceId = $('#placeId').val();
+                $.ajax({
+                    url: '/TourCus/listTour',
+                    type: 'GET',
+                    data: { loaitour: selectedType, placeId: selectedPlaceId },
+                    success: function (result) {
+                        // Update the tour list in the view
+                        $('#tourList').html(result);
+                    },
+                    error: function () {
+                        alert('An error occurred while retrieving the tour list.');
+                    }
+                });
+            }
+
+            $(document).ready(function () {
+                syncUpData();
+
+                $('#tourType, #placeId').change(function () {
+                    syncUpData();
+                });
+            });
+        </script>
+    }*@
+@section Scripts {
+    <script>
+        function syncUpData() {
+            var selectedType = $('#tourType').val();
+            var selectedPlaceId = $('#placeId').val();
+            var searchString = "@ViewData["searchString"]";
+            $.ajax({
+                url: '/TourCus/listTour',
+                type: 'GET',
+                data: { loaitour: selectedType, placeId: selectedPlaceId, searchString: searchString },
+                success: function (result) {
+                    // Update the tour list in the view
+                    console.log("Search String", searchString);
+                    console.log("Result --- ", result);
+                    $('#tourList').html(result);
+                },
+                error: function () {
+                    alert('An error occurred while retrieving the tour list.');
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            syncUpData();
+
+            $('#tourType, #placeId').change(function () {
+                syncUpData();
+            });
+        });
+    </script>
+}

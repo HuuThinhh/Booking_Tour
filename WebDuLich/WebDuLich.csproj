@@ -1,0 +1,322 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{81976E90-13CA-4DBC-B22D-7D58FBE3E8AF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebDuLich</RootNamespace>
+    <AssemblyName>WebDuLich</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44303</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.1\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Public\css\app.css" />
+    <Content Include="Public\css\bootstrap.css" />
+    <Content Include="Public\css\cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css" />
+    <Content Include="Public\css\css_slider.css" />
+    <Content Include="Public\css\font-awesome.min.css" />
+    <Content Include="Public\css\style.css" />
+    <Content Include="Public\css\style.min.css" />
+    <Content Include="Public\fonts\fontawesome-webfont.svg" />
+    <Content Include="Public\images\about.jpg" />
+    <Content Include="Public\images\admin_images\a.png" />
+    <Content Include="Public\images\admin_images\anhLogin.jpg" />
+    <Content Include="Public\images\admin_images\b.png" />
+    <Content Include="Public\images\admin_images\bg_admin.png" />
+    <Content Include="Public\images\admin_images\c.png" />
+    <Content Include="Public\images\admin_images\d.png" />
+    <Content Include="Public\images\admin_images\e.png" />
+    <Content Include="Public\images\admin_images\favicon.png" />
+    <Content Include="Public\images\admin_images\l.png" />
+    <Content Include="Public\images\banner1.jpg" />
+    <Content Include="Public\images\banner2.jpg" />
+    <Content Include="Public\images\banner3.jpg" />
+    <Content Include="Public\images\banner4.jpg" />
+    <Content Include="Public\images\china.jpg" />
+    <Content Include="Public\images\choose.jpg" />
+    <Content Include="Public\images\japan.jpg" />
+    <Content Include="Public\images\malaysia.jpg" />
+    <Content Include="Public\images\p1.jpg" />
+    <Content Include="Public\images\p2.jpg" />
+    <Content Include="Public\images\p3.jpg" />
+    <Content Include="Public\images\p4.jpg" />
+    <Content Include="Public\images\singapore.jpg" />
+    <Content Include="Public\images\te1.jpg" />
+    <Content Include="Public\images\te2.jpg" />
+    <Content Include="Public\images\te3.jpg" />
+    <Content Include="Public\images\tour_images\ba-na-hills.jpg" />
+    <Content Include="Public\images\tour_images\co-do-hue.jpg" />
+    <Content Include="Public\images\tour_images\cu-lao-cham.jpg" />
+    <Content Include="Public\images\tour_images\hoi-an.jpg" />
+    <Content Include="Public\js\app-style-switcher.js" />
+    <Content Include="Public\js\app.js" />
+    <Content Include="Public\js\bootstrap.bundle.min.js" />
+    <Content Include="Public\js\cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js" />
+    <Content Include="Public\js\Chart.min.js" />
+    <Content Include="Public\js\custom.js" />
+    <Content Include="Public\js\jquery.min.js" />
+    <Content Include="Public\js\moment.min.js" />
+    <Content Include="Public\js\sidebarmenu.js" />
+    <Content Include="Public\js\waves.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BookingController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HotelController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PlaceController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReviewController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatisticController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TourController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TransportationController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReviewView.cs" />
+    <Compile Include="Controllers\TaiKhoanController.cs" />
+    <Compile Include="Controllers\TourCusController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Mail.cs" />
+    <Compile Include="Library\XMessage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Place\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Place\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Place\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Place\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Place\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Message.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Hotel\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Transportation\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Transportation\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Transportation\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Transportation\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Transportation\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tour\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Tour\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Tour\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Tour\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Tour\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Review\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Review\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Review\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Review\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Review\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\ViewDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\ViewEdit.cshtml" />
+    <Content Include="Areas\Admin\Views\Statistic\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Booking\Edit2.cshtml" />
+    <None Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Public\fonts\fontawesome-webfont.eot" />
+    <Content Include="Public\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Public\fonts\fontawesome-webfont.woff" />
+    <Content Include="Public\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Public\fonts\FontAwesome.otf" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Shared\_LayoutAccount.cshtml" />
+    <Content Include="Views\TaiKhoan\Index.cshtml" />
+    <Content Include="Views\TaiKhoan\Edit.cshtml" />
+    <Content Include="Views\TourCus\Tour.cshtml" />
+    <Content Include="Views\TourCus\Index.cshtml" />
+    <Content Include="Views\Shared\_TourListPartial.cshtml" />
+    <Content Include="Views\TaiKhoan\ChangePass.cshtml" />
+    <Content Include="Views\Shared\Message.cshtml" />
+    <Content Include="Views\TourCus\Detail.cshtml" />
+    <Content Include="Views\TourCus\Message2.cshtml" />
+    <Content Include="Views\TourCus\BookingTour.cshtml" />
+    <Content Include="Views\TaiKhoan\History.cshtml" />
+    <Content Include="Views\TaiKhoan\QrCode.cshtml" />
+    <Content Include="Views\Home\CamNang.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
+    <Content Include="Views\Home\ThongTin.cshtml" />
+    <Content Include="Views\Home\Message2.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyClass\MyClass.csproj">
+      <Project>{a84bb496-569f-49ad-b0cb-dd173e1c6ee4}</Project>
+      <Name>MyClass</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64594</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44303/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

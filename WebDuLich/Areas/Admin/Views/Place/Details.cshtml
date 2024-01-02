@@ -1,0 +1,27 @@
+﻿@model MyClass.Models.Place
+
+@{
+    ViewBag.Title = "Xem thông tin địa điểm";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<h3 class="box-title">Thông Tin Chi Tiết Địa Điểm "@Html.DisplayFor(model => model.Name)"</h3>
+<p class="text-muted">Add class <code>.Place </code></p>
+<a href="@Url.Action("Index","Place")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+<p></p>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+
+
+</dl>
+<p>
+    <a href="@Url.Action("Edit","Place", new { id = Model.Id })" class="btn btn-sm btn-success text-light"><i class="fa fa-edit"></i> Chỉnh sửa</a>
+</p>

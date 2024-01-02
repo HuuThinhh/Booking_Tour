@@ -1,0 +1,63 @@
+﻿@model List<MyClass.Models.Booking>
+
+@{
+    ViewBag.Title = "Quản lý tour được book";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    var customer = (MyClass.Models.Customer)System.Web.HttpContext.Current.Session["user"];
+}
+<h2>Lịch sử đặt tour</h2>
+<div class="contact-grids">
+    <div class="row">
+        <div class="col-lg-10 contact-left-form">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên tour</th>
+                        @*<th>HotelId</th>
+                            <th>TransportationId</th>*@
+                        <th>Ngày đặt</th>
+                        <th>Số lượng người lớn</th>
+                        <th>Số lượng trẻ em</th>
+                        <th>Thành tiền</th>
+                        <th>Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var booking in Model)
+                    {
+                        <tr>
+                            <td>@booking.Id</td>
+                            <td>@booking.Tour.Name</td>
+                            @*<td>@booking.HotelId</td>
+                                <td>@booking.TransportationId</td>*@
+                            <td>@booking.BookDate</td>
+                            <th>@booking.NumberOfAdults</th>
+                            <th>@booking.NumberOfChildren</th>
+                            <th>@booking.TotalPrice</th>
+                            @if (@booking.Status == 1)
+                            {
+                                <th> 
+                                    Chưa thanh toán  
+                                    <a href="@Url.Action("QrCode","TaiKhoan", new { id = booking.UserId })" class="btn btn-sm btn-info text-light"><i class="fa fa-edit"></i>Cọc</a>
+                                </th>                                
+                            }
+                            @if (@booking.Status == 2)
+                            {
+                                <th>Đã cọc</th>
+                            }
+                            @if (@booking.Status == 3)
+                            {
+                                <th>Đã Thanh toán</th>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+

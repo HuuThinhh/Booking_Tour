@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    //var user = (TourMVC.Models.Customer)System.Web.HttpContext.Current.Session["user"];
+}
+
+<div class="container">
+    <div class="row h-100 mb-5 mt-5">
+        <div class="col-8 mx-auto text-center m-5">
+            <div>
+                <label class="h1 text-center m-5">Đăng Nhập</label>
+            </div>
+            <label class="text-center alert-danger mb-4">
+                @ViewBag.thongbao
+                @Html.Partial("Message2")
+            </label>
+            <form method="post">
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" name="email" class="form-control" value="@ViewBag.email" />
+                    <label class="form-label">Địa chỉ Email</label>
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <input type="password" name="password" class="form-control" />
+                    <label class="form-label">Mật khẩu</label>
+                </div>
+                <div class="row mb-4">
+                    <div class="col">
+                        <a href="/Home/ForgotPassword">Quên mật khẩu?</a>
+                    </div>
+                </div>
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Đăng Nhập</button>
+            </form>
+        </div>
+    </div>
+</div>

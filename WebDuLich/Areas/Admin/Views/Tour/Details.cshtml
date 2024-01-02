@@ -1,0 +1,127 @@
+﻿@model MyClass.Models.Tour
+
+@{
+    ViewBag.Title = "Xem thông tin tour";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h3 class="box-title">Thông Tin Chi Tiết Tour "@Html.DisplayFor(model => model.Name)"</h3>
+<p class="text-muted">Add class <code>.Tour </code></p>
+<a href="@Url.Action("Index","Tour")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+<div class="container py-lg-5 py-sm-4">
+    <div class="contact-grids">
+        <div class="row">
+            <div class="col-lg-3 contact-left-form">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name)
+
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                        <hr />
+
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PlaceId)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Place.Name)
+                        <hr />
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NumberOfParticipants)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NumberOfParticipants)
+                        <hr />
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AdultPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AdultPrice) VNĐ
+                        <hr />
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ChildPrice)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ChildPrice) VNĐ
+                        <hr />
+                    </dd>
+
+                    @*<dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>*@
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.EndDate)
+                        <hr />
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Image)
+                    </dt>
+
+                    <dd>
+                        @*@Html.DisplayFor(model => model.Image)*@
+                        <img src="@Url.Content("~/Public/images/tour_images/" + Model.Image)" style="width:150px;height:200px;" />
+                        <hr />
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsDomestic)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.IsDomestic)
+                        <hr />
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Type)
+                        <hr />
+                    </dd>
+                </dl>
+                <p>
+                    <a href="@Url.Action("Edit","Tour", new { id = Model.Id })" class="btn btn-sm btn-success text-light"><i class="fa fa-edit"></i> Chỉnh sửa</a>
+                </p>
+            </div>
+            <div class="col-lg-9 contact-right pl-lg-5 ">
+                <dl>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                        <hr />
+                    </dt>
+
+                    <dd>
+                        @Html.Raw(Model.Description)
+                    </dd>
+                </dl>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+

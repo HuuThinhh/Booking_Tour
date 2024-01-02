@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MyClass.Models.Review>
+
+@{
+    ViewBag.Title = "Quản lý bình luận";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section header {
+    <link href="~/Public/css/cdn.datatables.net_1.13.6_css_jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section footer {
+    <script src="~/Public/js/cdn.datatables.net_1.13.6_js_jquery.dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#myTable');
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
+
+        
+                        <h3 class="box-title">Danh Sách Bình Luận</h3>
+                        <p class="text-muted">Add class <code>.Review </code></p>
+                        @*<a href="@Url.Action("Create","Review")" class="btn btn-sm btn-success text-light"><i class="fa fa-plus"></i> Thêm Khách Sạn Mới</a>*@
+                        <p> </p>
+                        @Html.Partial("Message")
+                        <div class="table-responsiv">
+
+                            <table class="table table-bordered table-striped" id="myTable">
+                                <thead>
+                                    <tr class="is-table-row bg-secondary bg-gradient">
+                                        <th class="col-sm-1 text-white text-center">
+                                            @Html.DisplayNameFor(model => model.TourId)
+                                        </th>
+                                        <th class="col-sm-2 text-white text-center">
+                                            @Html.DisplayNameFor(model => model.CustomerId)
+                                        </th>
+                                        <th class="col-sm-1 text-white text-center">
+                                            @Html.DisplayNameFor(model => model.Rating)
+                                        </th>
+                                        <th class="col-sm-4 text-white text-center">
+                                            @Html.DisplayNameFor(model => model.Comment)
+                                        </th>
+                                        <th class="col-sm-2.5 text-white text-center">
+                                            @Html.DisplayNameFor(model => model.ReviewDate)
+                                        </th>
+                                        <th class="col-sm-1.5 text-white text-center">Chức năng</th>
+                                    </tr>
+                                <thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.TourId)
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.CustomerId)
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.Rating) Sao
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Comment)
+                                            </td>
+                                            <td class="text-center">
+                                                @Html.DisplayFor(modelItem => item.ReviewDate)
+                                            </td>
+                                            <td class="text-center">
+                                                @*<a href="@Url.Action("Details","Review", new { id = item.Id })" class="btn btn-sm btn-primary text-light"><i class="fa fa-eye"></i>Xem</a>*@
+                                                @*<a href="@Url.Action("Edit","Review", new { id = item.Id })" class="btn btn-sm btn-info text-light"><i class="fa fa-edit"></i>Sửa</a>*@
+                                                <a href="@Url.Action("Delete","Review", new { id = item.Id })" class="btn btn-sm btn-danger text-light"><i class="fa fa-trash"></i> Xoá</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                <tbody>
+                            </table>
+
+                        </div>
+                    

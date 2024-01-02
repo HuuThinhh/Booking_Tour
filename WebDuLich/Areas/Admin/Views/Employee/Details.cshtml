@@ -1,0 +1,83 @@
+﻿@model MyClass.Models.Employee
+
+@{
+    ViewBag.Title = "Xem thông tin nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<h3 class="box-title">Thông Tin Chi Tiết Nhân Viên "@Html.DisplayFor(model => model.FirstName)"</h3>
+<p class="text-muted">Add class <code>.Employee </code></p>
+<a href="@Url.Action("Index","Employee")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+<p></p>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Phone)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Phone)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Password)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Password)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.RoleId)
+    </dt>
+
+    <dd>
+        @if (Model.RoleId == 3)
+        {
+            <p>Nhân viên quản lý khách hàng</p>
+        }
+        @if (Model.RoleId == 2)
+        {
+            <p>Nhân viên quản lý tour</p>
+        }
+
+    </dd>
+
+</dl>
+<p>
+    <a href="@Url.Action("Edit","Employee", new { id = Model.Id })" class="btn btn-sm btn-success text-light"><i class="fa fa-edit"></i> Chỉnh sửa</a>
+</p>
+

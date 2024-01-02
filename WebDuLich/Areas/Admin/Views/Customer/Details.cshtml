@@ -1,0 +1,66 @@
+﻿@model MyClass.Models.Customer
+
+@{
+    ViewBag.Title = "Xem thông tin khách hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<h3 class="box-title">Thông Tin Chi Tiết Khách Hàng "@Html.DisplayFor(model => model.FirstName)"</h3>
+<p class="text-muted">Add class <code>.Customer </code></p>
+<a href="@Url.Action("Index","Customer")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+<p></p>
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Email)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Email)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Phone)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Phone)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Password)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Password)
+    </dd>
+
+</dl>
+<p>
+    <a href="@Url.Action("Edit","Customer", new { id = Model.Id })" class="btn btn-sm btn-success text-light"><i class="fa fa-edit"></i> Chỉnh sửa</a>
+</p>

@@ -1,0 +1,44 @@
+﻿
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+    var customer = (MyClass.Models.Customer)System.Web.HttpContext.Current.Session["user"];
+}
+
+<div class="container">
+    <h2 class="text-center p-5">Thông tin tài khoản</h2>
+    <hr />
+    @Html.Partial("Message")
+    <form method="post">
+        <div class="form-outline mb-4">
+            <label class="font-weight-bold">Họ của bạn:</label>
+            <div><input class="w-50" name="firstname" value="@customer.FirstName" /></div>
+        </div>
+        <div class="form-outline mb-4">
+            <label class="font-weight-bold">Tên của bạn:</label>
+            <div><input class="w-50" name="lastname" value="@customer.LastName" /></div>
+        </div>
+        <div class="form-outline mb-4">
+            <label class="font-weight-bold">Địa chỉ email:</label>
+            <span class="ml-2 fa-lock"></span><span class="alert-warning">Không thể sửa đổi</span>
+            <div><input class="w-50 form-control" name="email" value="@customer.Email" readonly /></div>
+        </div>
+        <div class="form-outline mb-4">
+            <label class="font-weight-bold">Số điện thoại:</label>
+            <span class="ml-2 fa-lock"></span><span class="alert-warning">Không thể sửa đổi</span>
+            <div><input class="w-50 form-control" name="phone" value="@customer.Phone" readonly /></div>
+        </div>
+        <div class="form-outline mb-4">
+            <label class="font-weight-bold">Địa chỉ:</label>
+            <div><input class="w-50" name="address" value="@customer.Address" /></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-4">Lưu</button>
+    </form>
+</div>
+
+
+<div>
+    <a href="/TaiKhoan/Index">Trở về</a>
+</div>

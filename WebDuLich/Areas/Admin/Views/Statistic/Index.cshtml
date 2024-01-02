@@ -1,0 +1,476 @@
+﻿@model MyClass.Models.Booking
+@{
+    ViewBag.Title = "Thống kê doanh thu";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+
+
+}
+@section header {
+
+}
+@section footer {
+
+    <script src="~/Public/js/Chart.min.js"></script>
+    <script src="~/Public/js/moment.min.js"></script>
+    <script>
+        //tour da thanh toan time
+        $(function () {
+            var arrTotal = [];
+            var arrDate = [];
+            $.ajax({
+                url: '/Statistic/GetStatisticalMonth3',
+                type: 'GET',
+                data: { fromDate: "", toDate: "" },
+                success: function (rs) {
+                    $.each(rs.Data, function (i, item) {
+                        var strDate = item.Month + "/" + item.Year;
+                        arrDate.push(strDate);
+                        arrTotal.push(item.Total)
+                        console.log(strDate);
+                    });
+                    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+                    var areaChartData = {
+                        labels: arrDate,
+                        datasets: [
+                            {
+                                label: 'Doanh thu',
+                                backgroundColor: 'rgba(60,141,188,0.9)',
+                                borderColor: 'rgba(60,141,188,0.8)',
+                                pointRadius: false,
+                                pointColor: '#3b8bba',
+                                pointStrokeColor: 'rgba(60,141,188,1)',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'rgba(60,141,188,1)',
+                                data: arrTotal
+                            },
+                        ]
+                    }
+                    var areaChartOptions = {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }],
+                            yAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }]
+                        }
+                    }
+                    new Chart(areaChartCanvas, {
+                        type: 'line',
+                        data: areaChartData,
+                        options: areaChartOptions
+                    });
+                    load_data(rs.Data);
+                }
+            });
+
+        })
+        function load_data(data) {
+            var strHtml = "";
+            $.each(data, function (i, item) {
+                var strDate = item.Month + "/" + item.Year;
+                strHtml += "<tr>";
+                strHtml += "<td>" + (i + 1) + "</td>";
+                strHtml += "<td>" + strDate + "</td>";
+                strHtml += "<td>" + item.Children + "</td>";
+                strHtml += "<td>" + item.Adults + "</td>";
+                strHtml += "<td>" + item.Total.toLocaleString('vi-VN') + "</td>";
+                strHtml += "</tr>";
+            });
+            $('#load_data').html(strHtml);
+        }
+        //tour da coc time
+        $(function () {
+            var arrTotal = [];
+            var arrDate = [];
+            $.ajax({
+                url: '/Statistic/GetStatisticalMonth2',
+                type: 'GET',
+                data: { fromDate: "", toDate: "" },
+                success: function (rs) {
+                    $.each(rs.Data, function (i, item) {
+                        var strDate = item.Month + "/" + item.Year;
+                        arrDate.push(strDate);
+                        arrTotal.push(item.Total)
+                        console.log(strDate);
+                    });
+                    var areaChartCanvas = $('#areaChart4').get(0).getContext('2d')
+                    var areaChartData = {
+                        labels: arrDate,
+                        datasets: [
+                            {
+                                label: 'Doanh thu',
+                                backgroundColor: 'rgba(60,141,188,0.9)',
+                                borderColor: 'rgba(60,141,188,0.8)',
+                                pointRadius: false,
+                                pointColor: '#3b8bba',
+                                pointStrokeColor: 'rgba(60,141,188,1)',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'rgba(60,141,188,1)',
+                                data: arrTotal
+                            },
+                        ]
+                    }
+                    var areaChartOptions = {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }],
+                            yAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }]
+                        }
+                    }
+                    new Chart(areaChartCanvas, {
+                        type: 'line',
+                        data: areaChartData,
+                        options: areaChartOptions
+                    });
+                    load_data4(rs.Data);
+                }
+            });
+
+        })
+        function load_data4(data) {
+            var strHtml = "";
+            $.each(data, function (i, item) {
+                var strDate = item.Month + "/" + item.Year;
+                strHtml += "<tr>";
+                strHtml += "<td>" + (i + 1) + "</td>";
+                strHtml += "<td>" + strDate + "</td>";
+                strHtml += "<td>" + item.Children + "</td>";
+                strHtml += "<td>" + item.Adults + "</td>";
+                strHtml += "<td>" + item.Total.toLocaleString('vi-VN') + "</td>";
+                strHtml += "</tr>";
+            });
+            $('#load_data4').html(strHtml);
+        }
+        //tour da thanh toan
+        $(function () {
+            var arrTotal2 = [];
+            var arrTour = [];
+            $.ajax({
+                url: '/Statistic/GetStatisticalTour3',
+                type: 'GET',
+                data: { fromDate: "", toDate: "" },
+                success: function (rs) {
+                    $.each(rs.Data, function (i, item) {
+                        arrTour.push(item.idTour);
+                        arrTotal2.push(item.Total)
+                        console.log(item.Tour);
+                    });
+                    var areaChartCanvas = $('#areaChart2').get(0).getContext('2d')
+                    var areaChartData = {
+                        labels: arrTour,
+                        datasets: [
+                            {
+                                label: 'Doanh thu',
+                                backgroundColor: 'rgba(60,141,188,0.9)',
+                                borderColor: 'rgba(60,141,188,0.8)',
+                                pointRadius: false,
+                                pointColor: '#3b8bba',
+                                pointStrokeColor: 'rgba(60,141,188,1)',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'rgba(60,141,188,1)',
+                                data: arrTotal2
+                            },
+                        ]
+                    }
+                    var areaChartOptions = {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }],
+                            yAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }]
+                        }
+                    }
+                    new Chart(areaChartCanvas, {
+                        type: 'line',
+                        data: areaChartData,
+                        options: areaChartOptions
+                    });
+                    load_data2(rs.Data);
+                }
+            });
+
+        })
+        function load_data2(data) {
+            var strHtml = "";
+            var totalAmount = 0;
+            $.each(data, function (i, item) {
+                strHtml += "<tr>";
+                strHtml += "<td>" + item.idTour + "</td>";
+                strHtml += "<td>" + item.TourName + "</td>";
+                strHtml += "<td>" + item.Children + "</td>";
+                strHtml += "<td>" + item.Adults + "</td>";
+                strHtml += "<td>" + item.Total.toLocaleString('vi-VN') + "</td>";
+                strHtml += "</tr>";
+                totalAmount += parseFloat(item.Total);
+            });
+            $('#TotalPrice').text(totalAmount.toLocaleString('vi-VN'));
+            $('#load_data2').html(strHtml);
+        }
+        //tour da coc
+        $(function () {
+            var arrTotal2 = [];
+            var arrTour = [];
+            $.ajax({
+                url: '/Statistic/GetStatisticalTour2',
+                type: 'GET',
+                data: { fromDate: "", toDate: "" },
+                success: function (rs) {
+                    $.each(rs.Data, function (i, item) {
+                        arrTour.push(item.idTour);
+                        arrTotal2.push(item.Total)
+                        console.log(item.Tour);
+                    });
+                    var areaChartCanvas = $('#areaChart3').get(0).getContext('2d')
+                    var areaChartData = {
+                        labels: arrTour,
+                        datasets: [
+                            {
+                                label: 'Doanh thu',
+                                backgroundColor: 'rgba(60,141,188,0.9)',
+                                borderColor: 'rgba(60,141,188,0.8)',
+                                pointRadius: false,
+                                pointColor: '#3b8bba',
+                                pointStrokeColor: 'rgba(60,141,188,1)',
+                                pointHighlightFill: '#fff',
+                                pointHighlightStroke: 'rgba(60,141,188,1)',
+                                data: arrTotal2
+                            },
+                        ]
+                    }
+                    var areaChartOptions = {
+                        maintainAspectRatio: false,
+                        responsive: true,
+                        legend: {
+                            display: false
+                        },
+                        scales: {
+                            xAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }],
+                            yAxes: [{
+                                gridLines: {
+                                    display: false,
+                                }
+                            }]
+                        }
+                    }
+                    new Chart(areaChartCanvas, {
+                        type: 'line',
+                        data: areaChartData,
+                        options: areaChartOptions
+                    });
+                    load_data3(rs.Data);
+                }
+            });
+
+        })
+        function load_data3(data) {
+            var strHtml = "";
+            var totalAmount = 0;
+            $.each(data, function (i, item) {
+                strHtml += "<tr>";
+                strHtml += "<td>" + item.idTour + "</td>";
+                strHtml += "<td>" + item.TourName + "</td>";
+                strHtml += "<td>" + item.Children + "</td>";
+                strHtml += "<td>" + item.Adults + "</td>";
+                strHtml += "<td>" + item.Total.toLocaleString('vi-VN') + "</td>";
+                strHtml += "</tr>";
+                totalAmount += parseFloat(item.Total);
+            });
+            $('#TotalPrice2').text(totalAmount.toLocaleString('vi-VN'));
+            $('#load_data3').html(strHtml);
+        }
+    </script>
+    @*<script>
+            function updateTotalRevenueSection() {
+                var statusDropdown = document.getElementById('StatusDropdown');
+                var selectedStatus = statusDropdown.value;
+
+
+                document.getElementById('allContent').style.display = 'none';
+                document.getElementById('tourContent').style.display = 'none';
+                document.getElementById('monthContent').style.display = 'none';
+
+
+                if (selectedStatus === '1') {
+                    document.getElementById('allContent').style.display = 'block';
+                } else if (selectedStatus === '2') {
+                    document.getElementById('tourContent').style.display = 'block';
+                } else if (selectedStatus === '3') {
+                    document.getElementById('monthContent').style.display = 'block';
+                }
+            }
+        </script>*@
+
+}
+@*<select name="Status" id="StatusDropdown" onchange="updateTotalRevenueSection()">
+        <option value="1">Tất cả</option>
+        <option value="2">Thống kê theo tour</option>
+        <option value="3">Thống kê theo tháng</option>
+    </select>*@
+<h2 class="text-center text-primary">Tổng doanh thu đã thanh toán: <span id="TotalPrice"></span> VNĐ</h2>
+<hr />
+<h2 class="text-center text-primary">Tổng doanh thu đã cọc: <span id="TotalPrice2"></span> VNĐ</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-7">
+        <h2 class="box-title">Biểu đồ doanh thu theo tháng đã thanh toán</h2>
+        <div class="card card-success">
+            <div class="card-header">
+                <div class="card-body">
+                    <div class="chart ">
+                        <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h2 class="box-title">Bảng doanh thu theo tháng đã thanh toán</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="is-table-row bg-secondary bg-gradient">
+                    <th class="text-white text-center">Stt</th>
+                    <th class="text-white text-center">Tháng/Năm (MM/yyyy)</th>
+                    <th class="text-white text-center">Tổng Trẻ em</th>
+                    <th class="text-white text-center">Tổng Người lớn</th>
+                    <th class="text-white text-center">Tổng doanh thu(VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody id="load_data" class="text-center"></tbody>
+        </table>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-7">
+        <h2 class="box-title">Biểu đồ doanh thu theo tháng đã cọc</h2>
+        <div class="card card-success">
+            <div class="card-header">
+                <div class="card-body">
+                    <div class="chart ">
+                        <canvas id="areaChart4" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h2 class="box-title">Bảng doanh thu theo tháng đã cọc</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="is-table-row bg-secondary bg-gradient">
+                    <th class="text-white text-center">Stt</th>
+                    <th class="text-white text-center">Tháng/Năm (MM/yyyy)</th>
+                    <th class="text-white text-center">Tổng Trẻ em</th>
+                    <th class="text-white text-center">Tổng Người lớn</th>
+                    <th class="text-white text-center">Tổng doanh thu(VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody id="load_data4" class="text-center"></tbody>
+        </table>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-7">
+        <h2 class="box-title">Biểu đồ doanh thu theo tour đã thanh toán</h2>
+        <div class="card card-success">
+            <div class="card-header">
+                <div class="card-body">
+                    <div class="chart ">
+                        <canvas id="areaChart2" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h2 class="box-title">Bảng doanh thu theo tour đã thanh toán</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="is-table-row bg-secondary bg-gradient">
+                    <th class="text-white text-center">Id Tour</th>
+                    <th class="text-white text-center">Tên Tour</th>
+                    <th class="text-white text-center">Tổng Trẻ em</th>
+                    <th class="text-white text-center">Tổng Người lớn</th>
+                    <th class="text-white text-center">Tổng doanh thu(VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody id="load_data2" class="text-center"></tbody>
+        </table>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-7">
+        <h2 class="box-title">Biểu đồ doanh thu theo tour đã cọc</h2>
+        <div class="card card-success">
+            <div class="card-header">
+                <div class="card-body">
+                    <div class="chart ">
+                        <canvas id="areaChart3" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <h2 class="box-title">Bảng doanh thu theo tour đã cọc</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr class="is-table-row bg-secondary bg-gradient">
+                    <th class="text-white text-center">Id Tour</th>
+                    <th class="text-white text-center">Tên Tour</th>
+                    <th class="text-white text-center">Tổng Trẻ em</th>
+                    <th class="text-white text-center">Tổng Người lớn</th>
+                    <th class="text-white text-center">Tổng doanh thu(VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody id="load_data3" class="text-center"></tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+

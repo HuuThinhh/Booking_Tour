@@ -1,0 +1,72 @@
+﻿@model MyClass.Models.Booking
+
+@{
+    ViewBag.Title = "Chỉnh sửa tình trạng thanh toán";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    <h3 class="box-title">Tình trạng thanh toán Tour Booking</h3>
+    <p class="text-muted">Add class <code>.Booking </code></p>
+    <a href="@Url.Action("Index","Booking")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+    <p></p>
+
+    @Html.HiddenFor(model => model.TourId, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+    @Html.HiddenFor(model => model.HotelId, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+    @Html.HiddenFor(model => model.TransportationId, new { htmlAttributes = new { @class = "form-control" } })
+
+
+    @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+    @Html.HiddenFor(model => model.BookDate, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+    @Html.HiddenFor(model => model.NumberOfAdults, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+    @Html.HiddenFor(model => model.NumberOfChildren, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+    @Html.HiddenFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
+
+    <p>Khách hàng: @ViewBag.LastName @ViewBag.FirstName </p>
+    <p>Email: @ViewBag.Email</p>
+    <div class="form-group">
+        <p class="fa fa-bell"> Tình trạng thanh thoán @Model.Tour.Name:</p>
+        <div class="col-md-10">
+            @*<select name="Status">
+                    <option value="1">Chưa thanh toán</option>
+                    <option value="2">Đã cọc</option>
+                    <option value="3">Đã Thanh toán</option>
+                </select>*@
+            @Html.DropDownListFor(model => model.Status, new List<SelectListItem>
+    {
+    new SelectListItem { Value = "1", Text = "Chưa thanh toán" },
+    new SelectListItem { Value = "2", Text = "Đã cọc" },
+    new SelectListItem { Value = "3", Text = "Đã Thanh toán" },
+    }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-sm btn-success text-light" type="submit" name="create"><i class="fa fa-save"></i> Lưu</button>
+        </div>
+    </div>
+
+}

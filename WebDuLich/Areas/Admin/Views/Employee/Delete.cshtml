@@ -1,0 +1,96 @@
+﻿@model MyClass.Models.Employee
+
+@{
+    ViewBag.Title = "Xoá nhân viên";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <h3 class="box-title">Xoá Nhân Viên "@Html.DisplayFor(model => model.FirstName)" ?</h3>
+    <p class="text-muted">Add class <code>.Employee </code></p>
+    <a href="@Url.Action("Index", "Employee")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+    <br />
+    <br />
+    <h3 class="box-title">Bạn chắc chắn muốn xoá nhân viên này ?</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-sm btn-danger text-light" type="submit" name="Delete"><i class="fa fa-trash"></i> Xoá</button>
+        </div>
+    </div>
+    <br />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleId)
+        </dt>
+
+        <dd>
+            @if (Model.RoleId != 2)
+            {
+                <p>Nhân viên quản lý khách hàng</p>
+            }
+            @if (Model.RoleId != 3)
+            {
+                <p>Nhân viên quản lý tour</p>
+            }
+        </dd>
+
+    </dl>
+    @*<div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-sm btn-danger text-light" type="submit" name="Delete"><i class="fa fa-trash"></i> Xoá</button>
+        </div>
+    </div>*@
+
+}           

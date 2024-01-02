@@ -1,0 +1,25 @@
+﻿@model MyClass.Models.Booking
+
+@{
+    ViewBag.Title = "Xoá tour được book";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <p class="text-muted">Add class <code>.Booking </code></p>
+    <a href="@Url.Action("Index", "Booking")" class="btn btn-sm btn-secondary text-light"><i class="fa fa-arrow-circle-left"></i> Về danh sách</a>
+    <br />
+    <br />
+    <h3 class="box-title">Bạn chắc chắn muốn xoá tour được Book này ?</h3>
+    <dl class="dl-horizontal">
+    </dl>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-sm btn-danger text-light" type="submit" name="Delete"><i class="fa fa-trash"></i> Xoá</button>
+        </div>
+    </div>
+
+}

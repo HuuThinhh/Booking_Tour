@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "ChangePass";
+    Layout = "~/Views/Shared/_LayoutAccount.cshtml";
+}
+
+<div class="container">
+    <h2 class="text-center p-5">Đổi mật khẩu</h2>
+    <hr />
+    @Html.Partial("Message")
+    <label class="text-center alert-danger mb-4">
+        @ViewBag.thongbao
+    </label>
+    <form method="post">
+        <div class="form-outline mb-4">
+            <label for="oldPassword">Mật khẩu cũ:</label>
+            <div><input class="w-50" type="password" name="oldpass" required></div>
+        </div>
+        <div class="form-outline mb-4">
+            <label for="newPassword">Mật khẩu mới:</label>
+            <div><input class="w-50" type="password" name="newpass" required></div>
+        </div>
+        <div class="form-outline mb-4">
+            <label for="confirmPassword">Nhập lại mật khẩu mới:</label>
+            <div><input class="w-50" type="password" name="confirmpass" required></div>
+        </div>
+        <button type="submit" class="btn btn-primary mb-4">Đổi mật khẩu</button>
+
+    </form>
+</div>

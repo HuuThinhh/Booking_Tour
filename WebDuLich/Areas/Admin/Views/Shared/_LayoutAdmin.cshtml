@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+          content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>@ViewBag.Title</title>
+    @*<link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />*@
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Public/images/admin_images/l.png">
+    <!-- Custom CSS -->
+    <link href="~/Public/css/style.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="~/Public/css/font-awesome.min.css" rel="stylesheet" /><!-- fontawesome css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    @RenderSection("header", required: false)
+</head>
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Dashboard")">
+                        <b class="logo-icon">
+                            <img src="~/Public/images/admin_images/a.png" alt="homepage" />
+                        </b>
+                        <span class="logo-text">
+                            <img src="~/Public/images/admin_images/b.png" alt="homepage" />
+                        </span>
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav p-xl-3 ms-auto align-items-center">
+                        <li>
+                            <a href="@Url.Action("Logout", "Auth")"
+                               class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white bi bi-box-arrow-right">
+                                Đăng Xuất
+                            </a>
+                            <a href="@Url.Action("ViewDetails", "Employee", new { id = @Session["UserId"] })"
+                               class="btn btn-primary  d-none d-md-block  ms-3 hidden-xs hidden-sm waves-effect waves-light text-white bi bi-person-vcard ">
+                                Chào @Session["UserName"]
+                            </a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav ">
+                    <ul id="sidebarnav">
+                        @if (Session["Session_role"] != null)
+                        {
+                            List<string> rolelevels = (List<string>)Session["Session_role"];
+                            {
+                                if (rolelevels[0].CompareTo("Quản trị viên") == 0)
+                                {
+                                    <li class="sidebar-item pt-2 ">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Place")"
+                                           aria-expanded="false">
+                                            <i class="far fa-map" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý địa điểm</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Transportation")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-car" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý phương tiện</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Tour")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-list" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý tour</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Hotel")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-hotel" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý khách sạn</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Booking")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý tour được book</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Customer")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-user" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý khách hàng</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Employee")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-users" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý nhân viên</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Review")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-comment" aria-hidden="true"></i>
+                                            <span class="hide-menu">Quản lý bình luận</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Statistic")"
+                                           aria-expanded="false">
+                                            <i class="fa fa-dollar" aria-hidden="true"></i>
+                                            <span class="hide-menu">Thống kê doanh thu</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                            if (rolelevels[0].CompareTo("Nhân viên quản lý khách hàng") == 0)
+                            {
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Booking")"
+                                       aria-expanded="false">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        <span class="hide-menu">Quản lý tour được book</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Customer")"
+                                       aria-expanded="false">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span class="hide-menu">Quản lý khách hàng</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Review")"
+                                       aria-expanded="false">
+                                        <i class="fa fa-comment" aria-hidden="true"></i>
+                                        <span class="hide-menu">Quản lý bình luận</span>
+                                    </a>
+                                </li>
+
+                            }
+                            if (rolelevels[0].CompareTo("Nhân viên quản lý tour") == 0)
+                            {
+                                <li class="sidebar-item pt-2 ">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Place")"
+                                       aria-expanded="false">
+                                        <i class="far fa-map" aria-hidden="true"></i>
+                                        <span class="hide-menu">Quản lý địa điểm</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Transportation")"
+                                       aria-expanded="false">
+                                        <i class="fa fa-car" aria-hidden="true"></i>
+                                        <span class="hide-menu">Quản lý phương tiện</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Tour")"
+                                       aria-expanded="false">
+                                        <i class="fa fa-list" aria-hidden="true"></i>
+                                        <span class="hide-menu">Quản lý tour</span>
+                                    </a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="@Url.Action("Index","Hotel")"
+                                       aria-expanded="false">
+                                        <i class="fa fa-hotel" aria-hidden="true"></i>
+                                        <span class="hide-menu">Quản lý khách sạn</span>
+                                    </a>
+                                </li>
+
+                            }
+                        }
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="page-wrapper" style="min-height: 250px;">
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Du Lịch Quảng Đà</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <div class="d-md-flex">
+                            <ol class="breadcrumb ms-auto">
+                                <li><a href="#" class="fw-normal"></a></li>
+                            </ol>
+                            <a href="https://localhost:44303/" target="_blank"
+                               class="btn btn-info  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">
+                                Website
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            @RenderBody()
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer text-center">
+                Copyright 2023 © Dulichquangda
+            </footer>
+        </div>
+    </div>
+
+    <script src="~/Public/js/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/Public/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Public/js/app-style-switcher.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Public/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Public/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Public/js/custom.js"></script>
+    @RenderSection("footer", required: false)
+</body>
+</html>
